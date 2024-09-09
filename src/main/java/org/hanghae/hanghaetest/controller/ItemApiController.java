@@ -3,7 +3,6 @@ package org.hanghae.hanghaetest.controller;
 import lombok.RequiredArgsConstructor;
 import org.hanghae.hanghaetest.dto.ItemRegisterDto;
 import org.hanghae.hanghaetest.dto.ItemRespDto;
-import org.hanghae.hanghaetest.entity.Item;
 import org.hanghae.hanghaetest.service.ItemService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,20 +19,20 @@ public class ItemApiController {
     private final ItemService itemService;
 
     @PostMapping
-    public ItemRespDto itemRegister(@RequestBody ItemRegisterDto itemRegisterDto) {
+    public ResponseEntity<ItemRespDto> itemRegister(@RequestBody ItemRegisterDto itemRegisterDto) {
 
-        return itemService.registerItem(itemRegisterDto);
+        return ResponseEntity.ok(itemService.registerItem(itemRegisterDto));
     }
 
     @GetMapping
-    public List<ItemRespDto> itemFindAll() {
-        return itemService.getItemList();
+    public ResponseEntity<List<ItemRespDto>> itemFindAll() {
+        return ResponseEntity.ok(itemService.getItemList());
     }
 
     @PutMapping("/{id}")
-    public ItemRespDto itemUpdate(@PathVariable("id") Long id,
+    public ResponseEntity<ItemRespDto> itemUpdate(@PathVariable("id") Long id,
                                   @RequestBody ItemRegisterDto itemRegisterDto) {
-        return itemService.updateItem(id, itemRegisterDto);
+        return ResponseEntity.ok(itemService.updateItem(id, itemRegisterDto));
     }
 
     @DeleteMapping("/{id}")
