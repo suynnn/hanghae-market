@@ -15,4 +15,6 @@ public interface ItemService {
     List<ItemRespDto> getItemList();
 
     ItemRespDto updateItem(Long id, ItemRegisterDto itemRegisterDto);
+
+    void deleteItem(Long id);
 }

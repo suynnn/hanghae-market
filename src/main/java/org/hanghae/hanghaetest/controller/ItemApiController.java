@@ -5,9 +5,12 @@ import org.hanghae.hanghaetest.dto.ItemRegisterDto;
 import org.hanghae.hanghaetest.dto.ItemRespDto;
 import org.hanghae.hanghaetest.entity.Item;
 import org.hanghae.hanghaetest.service.ItemService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/post")
@@ -31,5 +34,15 @@ public class ItemApiController {
     public ItemRespDto itemUpdate(@PathVariable("id") Long id,
                                   @RequestBody ItemRegisterDto itemRegisterDto) {
         return itemService.updateItem(id, itemRegisterDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map<String, String>> itemDelete(@PathVariable("id") Long id) {
+        itemService.deleteItem(id);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("msg", "삭제완료");
+
+        return ResponseEntity.ok(response);
     }
 }

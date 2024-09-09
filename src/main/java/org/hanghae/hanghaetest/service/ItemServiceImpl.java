@@ -17,8 +17,8 @@ public class ItemServiceImpl implements ItemService {
 
     private final ItemRepository itemRepository;
 
-    @Override
     @Transactional
+    @Override
     public ItemRespDto registerItem(ItemRegisterDto itemRegisterDto) {
         Item item = new Item(itemRegisterDto);
 
@@ -35,12 +35,18 @@ public class ItemServiceImpl implements ItemService {
                 .toList();
     }
 
-    @Override
     @Transactional
+    @Override
     public ItemRespDto updateItem(Long id, ItemRegisterDto itemRegisterDto) {
         Item item = itemRepository.findById(id).orElseThrow(() -> new RuntimeException("item not found"));
         item.updateItem(itemRegisterDto);
 
         return new ItemRespDto(item);
+    }
+
+    @Transactional
+    @Override
+    public void deleteItem(Long id) {
+        itemRepository.deleteById(id);
     }
 }
