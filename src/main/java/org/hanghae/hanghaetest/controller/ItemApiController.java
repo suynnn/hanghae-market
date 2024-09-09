@@ -26,4 +26,10 @@ public class ItemApiController {
     public List<ItemRespDto> itemFindAll() {
         return itemService.getItemList();
     }
+
+    @PutMapping("/{id}")
+    public ItemRespDto itemUpdate(@PathVariable("id") Long id,
+                                  @RequestBody ItemRegisterDto itemRegisterDto) {
+        return itemService.updateItem(id, itemRegisterDto);
+    }
 }

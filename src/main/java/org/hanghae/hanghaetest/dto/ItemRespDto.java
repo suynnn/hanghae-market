@@ -1,6 +1,7 @@
 package org.hanghae.hanghaetest.dto;
 
 import lombok.*;
+import org.hanghae.hanghaetest.entity.Item;
 
 @Getter
 @Setter
@@ -14,11 +15,11 @@ public class ItemRespDto {
     private Integer price;
 
     @Builder
-    public ItemRespDto(Long id, String username, String title, String content, Integer price) {
-        this.id = id;
-        this.username = username;
-        this.title = title;
-        this.content = content;
-        this.price = price;
+    public ItemRespDto(Item item) {
+        this.id = item.getId();
+        this.username = item.getUsername();
+        this.title = item.getTitle();
+        this.content = item.getContent();
+        this.price = item.getPrice();
     }
 }

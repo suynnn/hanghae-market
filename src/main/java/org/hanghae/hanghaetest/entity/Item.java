@@ -35,4 +35,11 @@ public class Item {
         this.content = itemRegisterDto.getContent();
         this.price = itemRegisterDto.getPrice();
     }
+
+    public void updateItem(ItemRegisterDto itemRegisterDto) {
+        this.username = itemRegisterDto.getUsername();
+        this.title = itemRegisterDto.getTitle();
+        this.content = itemRegisterDto.getContent();
+        this.price = itemRegisterDto.getPrice();
+    }
 }

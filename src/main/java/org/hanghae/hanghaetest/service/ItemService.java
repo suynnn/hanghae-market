@@ -13,4 +13,6 @@ public interface ItemService {
     ItemRespDto registerItem (ItemRegisterDto itemRegisterDto);
 
     List<ItemRespDto> getItemList();
+
+    ItemRespDto updateItem(Long id, ItemRegisterDto itemRegisterDto);
 }

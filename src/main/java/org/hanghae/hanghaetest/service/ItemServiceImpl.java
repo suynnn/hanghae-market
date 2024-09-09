@@ -6,41 +6,41 @@ import org.hanghae.hanghaetest.dto.ItemRespDto;
 import org.hanghae.hanghaetest.entity.Item;
 import org.hanghae.hanghaetest.repository.ItemRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
 
     private final ItemRepository itemRepository;
 
     @Override
+    @Transactional
     public ItemRespDto registerItem(ItemRegisterDto itemRegisterDto) {
         Item item = new Item(itemRegisterDto);
 
         itemRepository.save(item);
 
-        ItemRespDto itemRespDto = ItemRespDto.builder()
-                .id(item.getId())
-                .username(item.getUsername())
-                .title(item.getTitle())
-                .content(item.getContent())
-                .price(item.getPrice())
-                .build();
+        ItemRespDto itemRespDto = new ItemRespDto(item);
 
         return itemRespDto;
     }
 
     @Override
     public List<ItemRespDto> getItemList() {
-        return itemRepository.findAll().stream().map(item -> ItemRespDto.builder()
-                .id(item.getId())
-                .username(item.getUsername())
-                .title(item.getTitle())
-                .content(item.getContent())
-                .price(item.getPrice())
-                .build())
+        return itemRepository.findAll().stream().map(ItemRespDto::new)
                 .toList();
+    }
+
+    @Override
+    @Transactional
+    public ItemRespDto updateItem(Long id, ItemRegisterDto itemRegisterDto) {
+        Item item = itemRepository.findById(id).orElseThrow(() -> new RuntimeException("item not found"));
+        item.updateItem(itemRegisterDto);
+
+        return new ItemRespDto(item);
     }
 }
