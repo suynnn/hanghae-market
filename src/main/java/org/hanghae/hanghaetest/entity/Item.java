@@ -1,8 +1,8 @@
 package org.hanghae.hanghaetest.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hanghae.hanghaetest.dto.ItemRegisterDto;
 
@@ -10,6 +10,7 @@ import org.hanghae.hanghaetest.dto.ItemRegisterDto;
 @ToString
 @Entity
 @Table(name = "items")
+@NoArgsConstructor
 public class Item {
 
     @Id

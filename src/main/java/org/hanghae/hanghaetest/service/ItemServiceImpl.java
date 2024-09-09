@@ -7,6 +7,8 @@ import org.hanghae.hanghaetest.entity.Item;
 import org.hanghae.hanghaetest.repository.ItemRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
@@ -28,5 +30,17 @@ public class ItemServiceImpl implements ItemService {
                 .build();
 
         return itemRespDto;
+    }
+
+    @Override
+    public List<ItemRespDto> getItemList() {
+        return itemRepository.findAll().stream().map(item -> ItemRespDto.builder()
+                .id(item.getId())
+                .username(item.getUsername())
+                .title(item.getTitle())
+                .content(item.getContent())
+                .price(item.getPrice())
+                .build())
+                .toList();
     }
 }
